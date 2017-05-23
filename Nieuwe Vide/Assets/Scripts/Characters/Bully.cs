@@ -63,7 +63,6 @@ public class Bully : Human {
     {
         SetEmotion(Emotions.Angry);
         _currentPlayer.Reputation -= BULLY_REPUTATION_BAD;
-        Debug.Log("Removing some rep");
     }
 
     protected override void Update()
@@ -121,7 +120,6 @@ public class Bully : Human {
         if (_currentPlayer.Reputation != 100f)
         {
             calculatedOffset = (100f - _currentPlayer.Reputation) / 100f * _maxHorizontalOffset;
-            Debug.Log(calculatedOffset);
         }
         
         if (_currentHorizontalOffset != calculatedOffset)

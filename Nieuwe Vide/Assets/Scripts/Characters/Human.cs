@@ -57,6 +57,23 @@ public class Human : MonoBehaviour
     protected virtual void Move()
     {
         transform.position += new Vector3(1, 0, 0) * _direction * _speed * Time.deltaTime;
+
+        CheckDestroy();
+    }
+
+    protected virtual void CheckDestroy()
+    {
+        if (this.transform.position.x < -15 && this._direction == -1 ||
+        this.transform.position.x > 15 && this._direction == 1)
+        {
+            BeforeDestroy();
+            Destroy(this.gameObject);
+        }
+    }
+
+    protected virtual void BeforeDestroy()
+    {
+
     }
 
     /// <summary>
