@@ -2,6 +2,14 @@
 
 public class Victim : Human
 {
+    public bool IsBullied
+    {
+        get
+        {
+            return _isBullied;
+        }
+    }
+
     public delegate void OnVictimAction(Victim victim);
     public event OnVictimAction OnVictimBulliedEvent;
     public event OnVictimAction OnVictimEscapedEvent;
@@ -29,23 +37,21 @@ public class Victim : Human
     protected override void Update()
     {
         base.Update();
+    }
 
+    protected override void BeforeDestroy()
+    {
+        base.BeforeDestroy();
         CheckEscaped();
     }
 
     private void CheckEscaped()
     {
-        if(this.transform.position.x < -15 && this._direction == -1 ||
-            this.transform.position.x > 15 && this._direction == 1)
+        if (!this._isBullied)
         {
-            if (!this._isBullied)
-            {
-                Debug.Log(this.name + " escaped the bullies.");
-                if (OnVictimEscapedEvent != null)
-                    OnVictimEscapedEvent(this);
-            }
-
-            Destroy(this.gameObject);
+            Debug.Log(this.name + " escaped the bullies.");
+            if (OnVictimEscapedEvent != null)
+                OnVictimEscapedEvent(this);
         }
     }
 
