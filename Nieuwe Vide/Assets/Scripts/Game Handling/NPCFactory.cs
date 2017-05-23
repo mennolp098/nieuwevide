@@ -17,23 +17,21 @@ public class NPCFactory : MonoBehaviour {
 	private Animator _npcAnimator;
 	private BoxCollider2D _boxCollider2D;
 
-	private Victim _victimScript;
-
-	private int _orderInLayer = -1 | 1;
+	private int _orderInLayer = -1 ^ 1;
 
 	/// <summary>
 	/// Builds a new npc.
 	/// </summary>
 	/// <returns>The new npc.</returns>
-	public GameObject BuildNewNpc()
+	public GameObject BuildNewNpc<T>() where T : Human
 	{
 		_npcGO = new GameObject();
-		_npcGO.name = "Victim NPC";
+		_npcGO.name = "NPC";
 		
 		_spriteRenderer = _npcGO.AddComponent<SpriteRenderer>() as SpriteRenderer;
 		_npcAnimator = _npcGO.AddComponent<Animator>() as Animator;
 		_boxCollider2D = _npcGO.AddComponent<BoxCollider2D>() as BoxCollider2D;
-		_victimScript = _npcGO.AddComponent<Victim>();
+		T npcScript = _npcGO.AddComponent<T>();
 
 		_spriteRenderer.sortingOrder = _orderInLayer;
 		_spriteRenderer.sprite = sprites[ Random.Range(0, sprites.Length) ] as Sprite;

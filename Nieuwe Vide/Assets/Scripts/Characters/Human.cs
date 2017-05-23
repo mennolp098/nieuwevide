@@ -20,10 +20,23 @@ public class Human : MonoBehaviour
         }
     }
 
+	public int Direction
+	{
+		get
+		{
+			return _direction;
+		}
+		set
+		{
+			_direction = value;
+			_width = _direction;
+		}
+	}
+
     protected bool _isMoving;
     protected int _direction = -1;
     [SerializeField]
-    protected float _speed;
+    protected float _speed = 1;
 
     protected float _width;
     protected float _height;
