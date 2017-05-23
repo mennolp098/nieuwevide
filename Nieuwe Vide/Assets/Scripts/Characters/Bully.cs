@@ -14,55 +14,28 @@ public class Bully : Human {
     /// </summary>
     public const float BULLY_REPUTATION_BAD = 5;
 
+    /// <summary>
+    /// The range when they will bully the victim.
+    /// </summary>
     public const float BULLY_RANGE = 5;
 
-    [SerializeField]
-    private Player _currentPlayer;
-    [SerializeField]
-    private Victim[] victims;
+    private Player _player;
 
     private float _maxHorizontalOffset = 10;
     private float _currentHorizontalOffset = 0;
     private Vector3 _startPosition;
     private CircleCollider2D _circleCollider;
 
-    /// <summary>
-    /// Adds a victim to the list of potential victims.
-    /// </summary>
-    public void AddVictim(Victim item)
-    {
-        item.OnVictimBulliedEvent += VictimBulliedEventHandler;
-        item.OnVictimEscapedEvent += VictimEscapedEventHandler;
-    }
-
-    /// <summary>
-    /// Removes a victim to the list of potential victims.
-    /// </summary>
-    public void RemoveVictim(Victim item)
-    {
-        item.OnVictimBulliedEvent -= VictimBulliedEventHandler;
-        item.OnVictimEscapedEvent -= VictimEscapedEventHandler;
-    }
-
-    /// <summary>
-    /// Sets the player for this instance.
-    /// </summary>
-    /// <param name="item"></param>
-    public void SetPlayer(Player item)
-    {
-        _currentPlayer = item;
-    }
-
     private void VictimBulliedEventHandler(Victim victim)
     {
         SetEmotion(Emotions.Happy);
-        _currentPlayer.Reputation += BULLY_REPUTATION_GOOD;
+        _player.Reputation += BULLY_REPUTATION_GOOD;
     }
 
     private void VictimEscapedEventHandler(Victim victim)
     {
         SetEmotion(Emotions.Angry);
-        _currentPlayer.Reputation -= BULLY_REPUTATION_BAD;
+        _player.Reputation -= BULLY_REPUTATION_BAD;
     }
 
     protected override void Update()
@@ -73,12 +46,8 @@ public class Bully : Human {
 
     protected override void Initialize()
     {
-        for (int i = 0; i < victims.Length; i++)
-        {
-            AddVictim(victims[i]);
-        }
-
         //base.Initialize();
+        _player = GameController.Instance.Player;
         _startPosition = this.transform.position;
         SetEmotion(Emotions.Happy);
 
@@ -93,8 +62,18 @@ public class Bully : Human {
         var victim = other.GetComponent<Victim>();
         if (victim != null)
         {
+            AddVictim(victim);
             BullyVictim(victim);
         }
+    }
+
+    /// <summary>
+    /// Adds a victim to the list of potential victims.
+    /// </summary>
+    private void AddVictim(Victim item)
+    {
+        item.OnVictimBulliedEvent += VictimBulliedEventHandler;
+        item.OnVictimEscapedEvent += VictimEscapedEventHandler;
     }
 
     private void BullyVictim(Victim victim)
@@ -117,9 +96,9 @@ public class Bully : Human {
         // So offset on 100 reputation should be 0
         // and on 0 reputation it should be max horizontal offset.
         var calculatedOffset = 0.0f;
-        if (_currentPlayer.Reputation != 100f)
+        if (_player.Reputation != 100f)
         {
-            calculatedOffset = (100f - _currentPlayer.Reputation) / 100f * _maxHorizontalOffset;
+            calculatedOffset = (100f - _player.Reputation) / 100f * _maxHorizontalOffset;
         }
         
         if (_currentHorizontalOffset != calculatedOffset)

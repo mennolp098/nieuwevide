@@ -5,8 +5,7 @@ using UnityEditor;
 using System.Collections;
 using System.IO;
 
-namespace ProefProeve.Audio
-{
+
 	public class AudioAsset : ScriptableObject {
 
 		public string AssetPath {
@@ -81,7 +80,7 @@ namespace ProefProeve.Audio
 				AudioAsset obj = ScriptableObject.CreateInstance<AudioAsset>();
 				obj.name = "New AudioAsset";
 				obj._volume = 100;
-				AssetDatabase.CreateAsset (obj, "Assets/Data/Audio/New Audio Asset.asset");
+				AssetDatabase.CreateAsset (obj, "Assets/Audio/New Audio Asset.asset");
 				Debug.LogWarning ("Error no audiosource was selected while creating the Audio Asset");
 				Debug.Log ("Creating empty Audio Asset");
 
@@ -110,4 +109,3 @@ namespace ProefProeve.Audio
 		#endif
 	}
 
-}

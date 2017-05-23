@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ProefProeve.Audio
-{
+
 	public class AudioChannel : MonoBehaviour {
 		private AudioAsset _audioAsset;
 		private AudioSource _audioSource;
@@ -91,4 +90,3 @@ namespace ProefProeve.Audio
 			_audioSource.UnPause ();
 		}
 	}
-}

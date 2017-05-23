@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
 
-namespace ProefProeve.Audio
-{
+
 	public class AudioManager : MonoBehaviour 
 	{
 		#region Static
@@ -507,6 +506,8 @@ namespace ProefProeve.Audio
 
 			_instance = this;
 
+            DontDestroyOnLoad(this.gameObject);
+
 			initialized = true;
 
 			return true;
@@ -652,4 +653,3 @@ namespace ProefProeve.Audio
 
 	}
 
-}

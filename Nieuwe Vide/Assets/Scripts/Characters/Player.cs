@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 public class Player : Human {
+    private const string VICTIM_INDICATOR_PATH = "VictimIndicator";
 
     public Victim Victim
     {
@@ -24,6 +25,8 @@ public class Player : Human {
         set
         {
             _reputation = value;
+
+            // Reputation should not be higher then 100
             if (_reputation >= 100)
                 _reputation = 100;
         }
@@ -32,6 +35,9 @@ public class Player : Human {
     private Victim _victimInRange;
     private CircleCollider2D _circleCollider;
     private float _reputation = 100;
+
+    [SerializeField]
+    private GameObject _victimIndicator;
 
     protected override void Initialize()
     {
@@ -58,8 +64,19 @@ public class Player : Human {
         var victim = other.GetComponent<Victim>();
         if (victim != null && !victim.IsBullied)
         {
+            _victimIndicator.SetActive(true);
             Debug.Log(victim.name + " is now in range to bully");
             this.Victim = victim;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        // When victim is out of range and no other victims found.
+        var victim = other.GetComponent<Victim>();
+        if (victim != null)
+        {
+            _victimIndicator.SetActive(false);
         }
     }
 
@@ -78,6 +95,7 @@ public class Player : Human {
             Debug.Log("Player is now bullying: " + _victimInRange.name);
             _victimInRange.BullyThis();
             _victimInRange = null;
+            _victimIndicator.SetActive(false);
         }
     }
 }
