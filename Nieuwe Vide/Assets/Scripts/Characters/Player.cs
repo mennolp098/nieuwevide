@@ -52,11 +52,11 @@ public class Player : Human {
         PlayerInputs();
 	}
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         // When victim is in range, change victim to this one.
         var victim = other.GetComponent<Victim>();
-        if (victim != null)
+        if (victim != null && !victim.IsBullied)
         {
             Debug.Log(victim.name + " is now in range to bully");
             this.Victim = victim;

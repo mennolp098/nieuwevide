@@ -2,6 +2,14 @@
 
 public class Victim : Human
 {
+    public bool IsBullied
+    {
+        get
+        {
+            return _isBullied;
+        }
+    }
+
     public delegate void OnVictimAction(Victim victim);
     public event OnVictimAction OnVictimBulliedEvent;
     public event OnVictimAction OnVictimEscapedEvent;
