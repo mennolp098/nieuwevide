@@ -51,11 +51,20 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public PlayerStats PlayerStats
+    {
+        get
+        {
+            return _playerStats;
+        }
+    }
+
     private static GameController _instance;
 
     [SerializeField] private NPCFactory _npcFactory;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private Player _player;
+    [SerializeField] private PlayerStats _playerStats;
 
     private bool _isEnded = false;
 
