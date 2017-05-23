@@ -5,10 +5,10 @@ using UnityEngine;
 public class NPCFactory : MonoBehaviour {
 
 	//The various skins for an Npc.
-	public RuntimeAnimatorController[] npcSkins;
+	public RuntimeAnimatorController[] npcSkins = new RuntimeAnimatorController[5];
 
 	//Just a placeholder for Skins.
-	public Sprite[] sprites;
+	public Sprite sprite;
 
 	//The NPC Object to Build.
 	private GameObject _npcGO;
@@ -16,47 +16,30 @@ public class NPCFactory : MonoBehaviour {
 	private SpriteRenderer _spriteRenderer;
 	private Animator _npcAnimator;
 	private BoxCollider2D _boxCollider2D;
+	private Victim _victimScript;
+//	private Rigidbody2D _rigidbody2D;
 
 	private int _orderInLayer = -1 | 1;
-
-	//A Singleton of this script.
-	private static NPCFactory _instance = new NPCFactory();
-
-	public static NPCFactory Instance
-	{
-		get { return _instance; }
-	}
-
-	void Awake()
-	{
-		if(Instance == this) { return; }
-		else 
-		{
-			Destroy(this.gameObject);
-		}
-	}
-
-	public void Spawn()
-	{
-		GameObject newlyBuiltNPC = BuildNewNpc();
-		GameObject newNPC = Instantiate(newlyBuiltNPC, new Vector2(0, 0), Quaternion.identity) as GameObject;
-	}
 
 	/// <summary>
 	/// Builds a new npc.
 	/// </summary>
 	/// <returns>The new npc.</returns>
-	private GameObject BuildNewNpc()
+	public GameObject BuildNewNpc(Vector2 spawnPosition)
 	{
 		_npcGO = new GameObject();
+		_npcGO.name = "Victim NPC";
 
-		_spriteRenderer = _npcGO.AddComponent<SpriteRenderer>();
-		_npcAnimator = _npcGO.AddComponent<Animator>();
-		_boxCollider2D = _npcGO.AddComponent<BoxCollider2D>();
+		_npcGO.transform.position = spawnPosition;
+
+		_spriteRenderer = _npcGO.AddComponent<SpriteRenderer>() as SpriteRenderer;
+		_npcAnimator = _npcGO.AddComponent<Animator>() as Animator;
+		_boxCollider2D = _npcGO.AddComponent<BoxCollider2D>() as BoxCollider2D;
+//		_rigidbody2D = _npcGO.AddComponent<Rigidbody2D>() as Rigidbody2D;
 
 		_spriteRenderer.sortingOrder = _orderInLayer;
-		_spriteRenderer.sprite = sprites[ Random.Range(0, sprites.Length) ];
-		_npcAnimator.runtimeAnimatorController = npcSkins[ Random.Range(0, npcSkins.Length) ];
+		_spriteRenderer.sprite = sprite as Sprite;
+		_npcAnimator.runtimeAnimatorController = npcSkins[ Random.Range(0, npcSkins.Length) ] as RuntimeAnimatorController;
 		_boxCollider2D.isTrigger = true;
 
 		return _npcGO;
