@@ -12,26 +12,45 @@ public class NPCSpawner : MonoBehaviour {
 	private SpawnDirection _spawnDirection;
 	private NPCFactory _npcFactory;
 
-	public float spawnWaitTime = 0;
+	public float spawnWaitTime = 6;
+	private float _spawnWaitCountDown;
 
 	void Awake()
 	{
 		_npcFactory = GetComponent<NPCFactory>();
-		SpawnNPC();
+	}
+
+	void Start()
+	{
+		_spawnWaitCountDown = spawnWaitTime;
+	}
+
+	void Update()
+	{
+		if(_spawnWaitCountDown <= 0)
+		{
+			_spawnDirection = (SpawnDirection)Random.Range(0, 1);
+			SpawnNPC();
+			_spawnWaitCountDown = spawnWaitTime;
+		}
+		_spawnWaitCountDown -= Time.deltaTime;
 	}
 
 	private void SpawnNPC()
 	{
-		GameObject newNPC;
+		Vector2 position = new Vector2();
 
 		switch(_spawnDirection)
 		{
 		case SpawnDirection.Left:
-			newNPC = _npcFactory.BuildNewNpc(new Vector2(-4, 0));
+			position = new Vector2(-4, 0);
 			break;
 		case SpawnDirection.Right:
-			newNPC = _npcFactory.BuildNewNpc(new Vector2(4, 0));
+			position = new Vector2(4, 0);
 			break;
 		}
+
+		GameObject newNPC = _npcFactory.BuildNewNpc();
+		newNPC.transform.position = position;
 	}
 }
