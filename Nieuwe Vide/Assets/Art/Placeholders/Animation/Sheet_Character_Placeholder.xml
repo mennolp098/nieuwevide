@@ -1,0 +1,12 @@
+<TextureAtlas imagePath="sprites.png">
+	<SubTexture name="Character_Placeholder00.png" x="245" y="519" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder01.png" x="490" y="1038" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder02.png" x="490" y="519" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder03.png" x="490" y="0" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder04.png" x="245" y="1038" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder05.png" x="735" y="0" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder06.png" x="245" y="0" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder07.png" x="0" y="1038" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder08.png" x="0" y="519" width="243" height="517"/>
+	<SubTexture name="Character_Placeholder09.png" x="0" y="0" width="243" height="517"/>
+</TextureAtlas>
