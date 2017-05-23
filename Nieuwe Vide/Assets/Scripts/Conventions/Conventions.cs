@@ -10,6 +10,7 @@ namespace ProefProeve.CodeConventions
     public class Conventions
     {
         public const int NAME_SECONDNAME = 0;
+
         public static object NameSecondName;
 
         private delegate void NameEventHandler();
@@ -66,21 +67,6 @@ namespace ProefProeve.CodeConventions
                 i++;
             }
         }
-
-    }
-       // If statements worden aangegeven als hieronder.
-
-
-
-    namespace ProefProeve
-    {
-
-    }
-
-    //Groeperingen gaan als volgt
-    //AI = Artificial Intelligence
-    namespace ProefProeve.AI
-    {
 
     }
 
