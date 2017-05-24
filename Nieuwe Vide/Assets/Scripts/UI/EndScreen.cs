@@ -4,6 +4,11 @@ using UnityEngine.UI;
 
 public class EndScreen : MonoBehaviour {
     [SerializeField] private Text _statText;
+    [SerializeField] private Image _backgroundImage;
+    [SerializeField] private Image _victoryImage;
+    [SerializeField] private Image _bullyImage;
+    [SerializeField] private Color _bullyColor;
+    [SerializeField] private Color _victoryColor;
 
     /// <summary>
     /// Shows the end screen.
@@ -21,17 +26,23 @@ public class EndScreen : MonoBehaviour {
             + "Saved souls: " + amountNotBullied + '\n'
             + "Bad reputation: " + endReputation + "/100" + '\n';
 
-        if(endReputation < 10)
+        if(endReputation < 10 || amountNotBullied < 2)
         {
             _statText.text += "Well Done!";
+            _victoryImage.gameObject.SetActive(true);
+            _backgroundImage.color = _victoryColor;
         }
         else if(endReputation < 50)
         {
             _statText.text += "Hmm not bad!";
+            _bullyImage.gameObject.SetActive(true);
+            _backgroundImage.color = _bullyColor;
         }
         else
         {
             _statText.text += "That is not nice!";
+            _bullyImage.gameObject.SetActive(true);
+            _backgroundImage.color = _bullyColor;
         }
 
         //rectTransform.DOAnchorPos(Vector2.zero, 2, true);
