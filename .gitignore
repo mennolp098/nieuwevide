@@ -34,3 +34,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Nieuwe Vide/Library/assetDatabase3
+*.dll
+Nieuwe Vide/Assets/Scripts/DOTween/DOTween43.dll

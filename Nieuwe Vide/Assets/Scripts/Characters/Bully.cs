@@ -31,12 +31,14 @@ public class Bully : Human {
     {
         SetEmotion(Emotions.Happy);
         _player.Reputation += BULLY_REPUTATION_GOOD;
+		GameObject.Find("NPC Factory").GetComponent<PlayerStats>().AddTainted();
     }
 
     private void VictimEscapedEventHandler(Victim victim)
     {
         SetEmotion(Emotions.Angry);
         _player.Reputation -= BULLY_REPUTATION_BAD;
+		GameObject.Find("NPC Factory").GetComponent<PlayerStats>().AddSaved();
     }
 
     protected override void Update()
