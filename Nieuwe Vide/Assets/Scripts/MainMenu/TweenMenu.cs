@@ -22,7 +22,7 @@ public class TweenMenu : MonoBehaviour {
     {
         for (int i = 0; i < tweenObjects.Length; i++)
         {
-            tweenObjects[i].DOAnchorPos(tweenObjects[i].anchoredPosition + new Vector2(1000, 0), 1);
+            //tweenObjects[i].DOAnchorPos(tweenObjects[i].anchoredPosition + new Vector2(1000, 0), 1);
             yield return new WaitForSeconds(0.5f);
         }
     }

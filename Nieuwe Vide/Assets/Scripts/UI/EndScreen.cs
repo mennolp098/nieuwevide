@@ -34,6 +34,6 @@ public class EndScreen : MonoBehaviour {
             _statText.text += "That is not nice!";
         }
 
-        rectTransform.DOAnchorPos(Vector2.zero, 2, true);
+        //rectTransform.DOAnchorPos(Vector2.zero, 2, true);
     }
 }
