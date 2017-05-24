@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnviromentMover : MonoBehaviour {
 
-    public float speed = 3;
+    public float speedMultiplier = 0;
+    private float speed = 0;
     private GameController gc;
 
     //too lazy for a delegate
@@ -14,7 +15,7 @@ public class EnviromentMover : MonoBehaviour {
     }
 
     void Update () {
-        this.speed = gc.PlayerSpeed;
+        this.speed = gc.PlayerSpeed * speedMultiplier;
         this.transform.position += new Vector3(-Time.deltaTime * speed, 0, 0);
 	}
 }

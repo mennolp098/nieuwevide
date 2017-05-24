@@ -25,7 +25,7 @@ public class Enviroment : MonoBehaviour {
     private int layer = 0;
 
     [SerializeField]
-    private float layerSpeed = 0;
+    private float layerSpeedMultiplier = 0;
 
     [SerializeField]
     private ObjectData[] objects = new ObjectData[2];
@@ -62,7 +62,7 @@ public class Enviroment : MonoBehaviour {
                 bg.transform.position = new Vector3(GetXPos(prevPlacedBG, bg) + XRng(), 0, 0) + offset + addedOffset;
             }
             EnviromentMover em = bg.AddComponent<EnviromentMover>();
-            em.speed = layerSpeed;
+            em.speedMultiplier = layerSpeedMultiplier;
             placedBGs.Add(bg);
             bg.name = this.name+ " " + sprite.name;
             prevPlacedBG = bg;
