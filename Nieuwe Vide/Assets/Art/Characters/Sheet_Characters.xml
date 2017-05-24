@@ -1,0 +1,13 @@
+<TextureAtlas imagePath="sprites.png">
+	<SubTexture name="Bully_Bully.png" x="375" y="497" width="360" height="495"/>
+	<SubTexture name="Bully_Idle.png" x="375" y="0" width="360" height="495"/>
+	<SubTexture name="NPC_Black_Idle.png" x="1004" y="0" width="211" height="470"/>
+	<SubTexture name="NPC_Black_Sad.png" x="1375" y="471" width="186" height="470"/>
+	<SubTexture name="NPC_Emo_Idle.png" x="1166" y="472" width="207" height="480"/>
+	<SubTexture name="NPC_Gay_Idle.png" x="0" y="0" width="373" height="460"/>
+	<SubTexture name="NPC_Gay_Sad.png" x="0" y="462" width="373" height="460"/>
+	<SubTexture name="NPc_Emo_Sad.png" x="1217" y="0" width="197" height="469"/>
+	<SubTexture name="Player_Bully.png" x="737" y="0" width="265" height="500"/>
+	<SubTexture name="Player_Idle.png" x="952" y="502" width="212" height="500"/>
+	<SubTexture name="Player_Sad.png" x="737" y="502" width="213" height="499"/>
+</TextureAtlas>

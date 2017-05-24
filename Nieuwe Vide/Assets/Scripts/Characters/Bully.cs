@@ -17,7 +17,7 @@ public class Bully : Human {
     /// <summary>
     /// The range when they will bully the victim.
     /// </summary>
-    public const float BULLY_RANGE = 5;
+    public const float BULLY_RANGE = 15;
 
     private Player _player;
 
@@ -25,20 +25,26 @@ public class Bully : Human {
     private float _maxHorizontalOffset = 10;
     private float _currentHorizontalOffset = 0;
     private Vector3 _startPosition;
-    private CircleCollider2D _circleCollider;
+    private BoxCollider2D _boxCollider;
+    private SpriteRenderer _spriteRenderer;
+
+    [SerializeField]
+    private Sprite _idleSprite;
+    [SerializeField]
+    private Sprite _bullySprite;
 
     private void VictimBulliedEventHandler(Victim victim)
     {
         SetEmotion(Emotions.Happy);
         _player.Reputation += BULLY_REPUTATION_GOOD;
-		GameObject.Find("NPC Factory").GetComponent<PlayerStats>().AddTainted();
+		GameController.Instance.PlayerStats.AddTainted();
     }
 
     private void VictimEscapedEventHandler(Victim victim)
     {
         SetEmotion(Emotions.Angry);
         _player.Reputation -= BULLY_REPUTATION_BAD;
-		GameObject.Find("NPC Factory").GetComponent<PlayerStats>().AddSaved();
+        GameController.Instance.PlayerStats.AddSaved();
     }
 
     protected override void Update()
@@ -55,9 +61,11 @@ public class Bully : Human {
         _startPosition = this.transform.position;
         SetEmotion(Emotions.Happy);
 
-        _circleCollider = gameObject.AddComponent<CircleCollider2D>();
-        _circleCollider.isTrigger = true;
-        _circleCollider.radius = BULLY_RANGE;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _boxCollider = gameObject.AddComponent<BoxCollider2D>();
+        _boxCollider.isTrigger = true;
+        _boxCollider.size = new Vector3(BULLY_RANGE,BULLY_RANGE,BULLY_RANGE);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -87,15 +95,17 @@ public class Bully : Human {
         if (_isBullying)
             return;
 
+        _spriteRenderer.sprite = _bullySprite;
+
         _isBullying = true;
         UIManager.Instance.CloudsManager.GetAvailableCloud().UseCloud(this.transform, 1, 0.5f);
-        Debug.Log(this.name + " is now bullying: " + victim.name);
         CancelInvoke("StopBullying");
         Invoke("StopBullying", 1);
     }
 
     private void StopBullying()
     {
+        _spriteRenderer.sprite = _idleSprite;
         _isBullying = false;
     }
 

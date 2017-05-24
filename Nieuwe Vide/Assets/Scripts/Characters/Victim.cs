@@ -16,6 +16,7 @@ public class Victim : Human
 
     private bool _isBullied;
 
+
     /// <summary>
     /// Trigger this when you want to bully this victim.
     /// </summary>
@@ -49,7 +50,7 @@ public class Victim : Human
     {
         if (!this._isBullied)
         {
-            Debug.Log(this.name + " escaped the bullies.");
+            this._isBullied = true;
             if (OnVictimEscapedEvent != null)
                 OnVictimEscapedEvent(this);
         }
@@ -57,7 +58,6 @@ public class Victim : Human
 
     private void GetBullied()
     {
-        Debug.Log(this.name + " is being bullied!");
 
         // Set boolean
         _isBullied = true;

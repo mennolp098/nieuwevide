@@ -2,8 +2,8 @@
 using UnityEngine.UI;
 
 public class Cloud : MonoBehaviour {
-    private const float xOffset = -6.5f;
-    private const float yOffset = -4.5f;
+    private const float xOffset = -7f;
+    private const float yOffset = -3.5f;
 
     public bool IsAvailable
     {

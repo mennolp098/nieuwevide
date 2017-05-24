@@ -46,11 +46,21 @@ public class Human : MonoBehaviour
     private float _startY;
     protected bool _gettingBigger = false;
 
+    private SpriteRenderer _spriteRenderer;
+    protected Sprite _sadSprite;
+    protected Sprite _normalSprite;
+
+    public void SetSprites(Sprite sadSprite, Sprite normalSprite)
+    {
+        _sadSprite = sadSprite;
+        _normalSprite = normalSprite;
+    }
+
     private void Start()
     {
-        var spriteRenderer = GetComponent<SpriteRenderer>();
-        _width = spriteRenderer.bounds.size.x;
-        _height = spriteRenderer.bounds.size.y;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _width = _spriteRenderer.bounds.size.x;
+        _height = _spriteRenderer.bounds.size.y;
         _isMoving = true;
         _startScale = this.transform.localScale;
         _startY = this.transform.position.y;
@@ -63,8 +73,6 @@ public class Human : MonoBehaviour
 
     protected virtual void Initialize()
     {
-        
-        SetEmotion(Random.Range(0, 3));
     }
 
     protected virtual void Update()
@@ -125,15 +133,13 @@ public class Human : MonoBehaviour
         switch (emotion)
         {
             case Emotions.Angry:
-                Debug.Log(this.name + " is now Angry!");
                 //TODO: Display angry emotion.
                 break;
             case Emotions.Happy:
-                Debug.Log(this.name + " is now Happy!");
                 //TODO: Display happy emotion.
                 break;
             case Emotions.Sad:
-                Debug.Log(this.name + " is now Sad!");
+                _spriteRenderer.sprite = _sadSprite;
                 //TODO: Display sad emotion.
                 break;
         }

@@ -21,8 +21,17 @@ public class GameTimer : MonoBehaviour {
             _currentTime -= 1;
             var timeInMinutes = Mathf.Floor(_currentTime / 60);
             var timeInSeconds = _currentTime - (timeInMinutes * 60);
-
-            _timerText.text = timeInMinutes + ":" + timeInSeconds;
+            string start = "";
+            string middle = ":";
+            if(timeInMinutes < 10)
+            {
+                start = "0";
+            }
+            if(timeInSeconds < 10)
+            {
+                middle = ":0";
+            }
+            _timerText.text = start + timeInMinutes + middle + timeInSeconds;
             yield return new WaitForSeconds(1);
         }
 

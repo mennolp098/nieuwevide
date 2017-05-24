@@ -9,6 +9,7 @@ public class Enviroment : MonoBehaviour {
     {
         public Sprite ObjectSprite;
         public Vector2 Offset;
+        public Vector2 Scale;
     }
 
     /*
@@ -52,6 +53,7 @@ public class Enviroment : MonoBehaviour {
             Vector3 addedOffset = data.Offset;
 
             bgRenderer.sprite = sprite;
+            bg.transform.localScale = data.Scale;
             bg.transform.parent = this.transform;
             if(prevPlacedBG == null)
             {

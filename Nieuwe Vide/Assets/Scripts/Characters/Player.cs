@@ -11,7 +11,6 @@ public class Player : Human {
         }
         set
         {
-            Debug.Log("[Player] Victim has been set to: " + value.name);
             _victimInRange = value;
         }
     }
@@ -35,21 +34,28 @@ public class Player : Human {
     }
 
     private Victim _victimInRange;
-    private CircleCollider2D _circleCollider;
+    private BoxCollider2D _boxCollider;
     private float _reputation = 100;
+    private SpriteRenderer _spriteRenderer;
 
     [SerializeField]
     private GameObject _victimIndicator;
+    [SerializeField]
+    private Sprite _idleSprite;
+    [SerializeField]
+    private Sprite[] _bullySprites;
 
     protected override void Initialize()
     {
         //We are not going to set the emotion of the player.
         //base.Initialize();
 
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         // Create circle collider.
-        _circleCollider = gameObject.AddComponent<CircleCollider2D>();
-        _circleCollider.isTrigger = true;
-        _circleCollider.radius = Bully.BULLY_RANGE;
+        _boxCollider = gameObject.AddComponent<BoxCollider2D>();
+        _boxCollider.isTrigger = true;
+        _boxCollider.size = new Vector3(Bully.BULLY_RANGE, Bully.BULLY_RANGE, Bully.BULLY_RANGE);
     }
 
     protected override void Update ()
@@ -67,7 +73,6 @@ public class Player : Human {
         if (victim != null && !victim.IsBullied)
         {
             _victimIndicator.SetActive(true);
-            Debug.Log(victim.name + " is now in range to bully");
             this.Victim = victim;
         }
     }
@@ -94,7 +99,7 @@ public class Player : Human {
     {
         if(_victimInRange != null)
         {
-            Debug.Log("Player is now bullying: " + _victimInRange.name);
+            _spriteRenderer.sprite = _bullySprites[Random.Range(0, _bullySprites.Length)];
             UIManager.Instance.CloudsManager.GetAvailableCloud().UseCloud(this.transform, 2);
             GameController.Instance.PlayerSpeed = 0;
             _victimInRange.BullyThis();
@@ -107,6 +112,7 @@ public class Player : Human {
 
     private void StartMoving()
     {
+        _spriteRenderer.sprite = _idleSprite;
         GameController.Instance.PlayerSpeed = 2;
     }
 }
