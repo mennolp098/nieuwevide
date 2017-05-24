@@ -17,7 +17,7 @@ public class NPCFactory : MonoBehaviour {
 	private Animator _npcAnimator;
 	private BoxCollider2D _boxCollider2D;
 
-	private int _orderInLayer = -1 ^ 1;
+	private int _orderInLayer = -1;
 
 	/// <summary>
 	/// Builds a new npc.
