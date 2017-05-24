@@ -12,6 +12,7 @@ public class Enviroment : MonoBehaviour {
         public Vector2 Scale;
     }
 
+    private Vector2 scale;  //hotfix
     /*
     private struct PlacedObjectData
     {
@@ -54,6 +55,9 @@ public class Enviroment : MonoBehaviour {
             bgRenderer.color = _color;
             bgRenderer.sortingOrder = layer;
             var data = GetRandomObject();
+
+            this.scale = data.Scale;    //Hotfix
+
             Sprite sprite = data.ObjectSprite;
             Vector3 addedOffset = data.Offset;
 
@@ -99,7 +103,7 @@ public class Enviroment : MonoBehaviour {
     private float GetWidth(GameObject go)
     {
         Sprite sprite = go.GetComponent<SpriteRenderer>().sprite;
-        return sprite.rect.size.x / 100;
+        return sprite.rect.size.x / 100 * scale.x;
     }
     private ObjectData GetRandomObject()
     {
