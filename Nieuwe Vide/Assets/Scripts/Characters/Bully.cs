@@ -47,6 +47,7 @@ public class Bully : Human {
     protected override void Initialize()
     {
         //base.Initialize();
+
         _player = GameController.Instance.Player;
         _startPosition = this.transform.position;
         SetEmotion(Emotions.Happy);

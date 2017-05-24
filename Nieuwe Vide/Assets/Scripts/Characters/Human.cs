@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 public class Human : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class Human : MonoBehaviour
 
     protected float _width;
     protected float _height;
+    protected Vector2 _startScale;
+    private float _startY;
+    protected bool _gettingBigger = false;
 
     private void Start()
     {
@@ -48,6 +52,9 @@ public class Human : MonoBehaviour
         _width = spriteRenderer.bounds.size.x;
         _height = spriteRenderer.bounds.size.y;
         _isMoving = true;
+        _startScale = this.transform.localScale;
+        _startY = this.transform.position.y;
+        Bop();
 
         //TODO: Play animation Walk
 
@@ -56,6 +63,7 @@ public class Human : MonoBehaviour
 
     protected virtual void Initialize()
     {
+        
         SetEmotion(Random.Range(0, 3));
     }
 
@@ -63,6 +71,24 @@ public class Human : MonoBehaviour
     {
         if (_isMoving)
             Move();
+    }
+
+    protected virtual void Bop()
+    {
+        var newScale = _startScale * 0.9f;
+        var jumpY = _startY + 0.1f;
+        if(_gettingBigger)
+        {
+            newScale = _startScale;
+            jumpY = _startY;
+            _gettingBigger = false;
+        }
+        else
+        {
+            _gettingBigger = true;
+        }
+        transform.DOScaleY(newScale.y, 0.25f);
+        transform.DOMoveY(jumpY, 0.25f).OnComplete(() => Bop());
     }
 
     /// <summary>
