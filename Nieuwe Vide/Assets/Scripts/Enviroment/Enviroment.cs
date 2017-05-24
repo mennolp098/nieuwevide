@@ -26,6 +26,9 @@ public class Enviroment : MonoBehaviour {
     private int layer = 0;
 
     [SerializeField]
+    private Color _color = new Color(1, 1, 1, 1);
+
+    [SerializeField]
     private float layerSpeedMultiplier = 0;
 
     [SerializeField]
@@ -40,6 +43,7 @@ public class Enviroment : MonoBehaviour {
     private List<GameObject> placedBGs = new List<GameObject>();
     private GameObject prevPlacedBG;
 
+    
     //Instantiate the first few bg objects
     void Start()
     {
@@ -47,6 +51,7 @@ public class Enviroment : MonoBehaviour {
         {
             GameObject bg = new GameObject();
             SpriteRenderer bgRenderer = bg.AddComponent<SpriteRenderer>();
+            bgRenderer.color = _color;
             bgRenderer.sortingOrder = layer;
             var data = GetRandomObject();
             Sprite sprite = data.ObjectSprite;
@@ -113,6 +118,7 @@ public class Enviroment : MonoBehaviour {
     private Vector2 ChangeSprite(GameObject _go)
     {
         var data = GetRandomObject();
+        
         _go.GetComponent<SpriteRenderer>().sprite = data.ObjectSprite;
 
         return data.Offset;
