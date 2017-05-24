@@ -5,7 +5,13 @@ using UnityEngine;
 public class Enviroment : MonoBehaviour {
 
     [SerializeField]
+    private int totalObjects = 15;
+
+    [SerializeField]
     private int layer = 0;
+
+    [SerializeField]
+    private float layerSpeed = 0;
 
     [SerializeField]
     private Sprite[] background = new Sprite[2];
@@ -13,13 +19,16 @@ public class Enviroment : MonoBehaviour {
     [SerializeField]
     private Vector3 offset = new Vector3(0, 0, 0);
 
+    [SerializeField]
+    private Vector2 xRNGRange = new Vector2(0, 0);
+
     private List<GameObject> placedBGs = new List<GameObject>();
     private GameObject prevPlacedBG;
 
     //Instantiate the first few bg objects
     void Start()
     {
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < totalObjects; i++)
         {
             GameObject bg = new GameObject();
             SpriteRenderer bgRenderer = bg.AddComponent<SpriteRenderer>();
@@ -29,13 +38,14 @@ public class Enviroment : MonoBehaviour {
             bg.transform.parent = this.transform;
             if(prevPlacedBG == null)
             {
-                bg.transform.position = new Vector3(0, 0, 0);
+                bg.transform.position = new Vector3(0, 0, 0) + offset;
             }
             else
             {
-                bg.transform.position = new Vector3(GetXPos(prevPlacedBG, bg), 0, 0) + offset;
+                bg.transform.position = new Vector3(GetXPos(prevPlacedBG, bg) + XRng(), 0, 0) + offset;
             }
-            bg.AddComponent<EnviromentMover>();
+            EnviromentMover em = bg.AddComponent<EnviromentMover>();
+            em.speed = layerSpeed;
             placedBGs.Add(bg);
             prevPlacedBG = bg;
         }
@@ -49,7 +59,7 @@ public class Enviroment : MonoBehaviour {
             if(go.transform.position.x < -20)
             {
                 ChangeBG(go);
-                go.transform.position = new Vector3(GetXPos(prevPlacedBG, go), 0, 0) + offset;
+                go.transform.position = new Vector3(GetXPos(prevPlacedBG, go) + XRng(), 0, 0) + offset;
                 prevPlacedBG = go;
             }
         }
@@ -69,7 +79,10 @@ public class Enviroment : MonoBehaviour {
     {
         return background[Random.Range(0, background.Length)];
     }
-
+    private float XRng()
+    {
+        return (xRNGRange.x + Random.value * xRNGRange.y) - xRNGRange.x;
+    }
     private void ChangeBG(GameObject _go)
     {
         _go.GetComponent<SpriteRenderer>().sprite = GetRandomBG();
