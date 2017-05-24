@@ -103,8 +103,8 @@ public class Human : MonoBehaviour
 
     protected virtual void CheckDestroy()
     {
-        if (this.transform.position.x < -15 && this._direction == -1 ||
-        this.transform.position.x > 15 && this._direction == 1)
+        if (this.transform.position.x <= -10 && this._direction == -1 ||
+        this.transform.position.x >= 10 && this._direction == 1)
         {
             BeforeDestroy();
             Destroy(this.gameObject);

@@ -45,6 +45,7 @@ public class EndScreen : MonoBehaviour {
             _backgroundImage.color = _bullyColor;
         }
 
-        //rectTransform.DOAnchorPos(Vector2.zero, 2, true);
+        Debug.Log("ROFLLADFJSDIFHASDF");
+        rectTransform.DOMoveY(300, 2f);
     }
 }

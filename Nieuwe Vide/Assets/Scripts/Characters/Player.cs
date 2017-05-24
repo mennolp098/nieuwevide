@@ -29,6 +29,8 @@ public class Player : Human {
             // Reputation should not be higher then 100
             if (_reputation >= 100)
                 _reputation = 100;
+            else if (_reputation <= 0)
+                _reputation = 0;
         }
     }
 
@@ -94,10 +96,17 @@ public class Player : Human {
         {
             Debug.Log("Player is now bullying: " + _victimInRange.name);
             UIManager.Instance.CloudsManager.GetAvailableCloud().UseCloud(this.transform, 2);
-
+            GameController.Instance.PlayerSpeed = 0;
             _victimInRange.BullyThis();
             _victimInRange = null;
             _victimIndicator.SetActive(false);
+            CancelInvoke("StartMoving");
+            Invoke("StartMoving", 1);
         }
+    }
+
+    private void StartMoving()
+    {
+        GameController.Instance.PlayerSpeed = 2;
     }
 }

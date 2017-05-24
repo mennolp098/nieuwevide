@@ -21,6 +21,7 @@ public class Bully : Human {
 
     private Player _player;
 
+    private bool _isBullying = false;
     private float _maxHorizontalOffset = 10;
     private float _currentHorizontalOffset = 0;
     private Vector3 _startPosition;
@@ -81,9 +82,19 @@ public class Bully : Human {
     {
         //TODO: show bully animation
         //TODO: lookat bully
+        if (_isBullying)
+            return;
 
+        _isBullying = true;
         UIManager.Instance.CloudsManager.GetAvailableCloud().UseCloud(this.transform, 1, 0.5f);
         Debug.Log(this.name + " is now bullying: " + victim.name);
+        CancelInvoke("StopBullying");
+        Invoke("StopBullying", 1);
+    }
+
+    private void StopBullying()
+    {
+        _isBullying = false;
     }
 
     protected override void Move()
@@ -98,14 +109,17 @@ public class Bully : Human {
         // So offset on 100 reputation should be 0
         // and on 0 reputation it should be max horizontal offset.
         var calculatedOffset = 0.0f;
-        if (_player.Reputation != 100f)
+        if (_player.Reputation != 100f && _player.Reputation > 0)
         {
             calculatedOffset = (100f - _player.Reputation) / 100f * _maxHorizontalOffset;
+        }
+        else if(_player.Reputation <= 0)
+        {
+            GameController.Instance.EndGame();
         }
         
         if (_currentHorizontalOffset != calculatedOffset)
         {
-            Debug.Log("Horizontal offset has been changed to: " + _currentHorizontalOffset);
             _currentHorizontalOffset = calculatedOffset;
             Move();
         } 

@@ -85,12 +85,12 @@ public class GameController : MonoBehaviour {
 
     public void EndGame()
     {
+        if (_isEnded)
+            return;
+
         _isEnded = true;
 
-        //TODO: Remove placeholder stats.
-        int amountBullied = 0;
-        int amountNotBullied = 0;
-        _uiManager.EndScreen.Show(amountBullied, amountNotBullied, Mathf.FloorToInt(_player.Reputation));
+        _uiManager.EndScreen.Show(PlayerStats.taintedSouls, PlayerStats.savedSouls, Mathf.FloorToInt(_player.Reputation));
     }
 
     private void Awake()
