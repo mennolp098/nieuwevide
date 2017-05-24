@@ -50,6 +50,20 @@ public class GameController : MonoBehaviour {
             return _isEnded;
         }
     }
+    /// <summary>
+    /// Returns the speed the level is moving at. 
+    /// </summary>
+    public float PlayerSpeed
+    {
+        get
+        {
+            return _playerSpeed;
+        }
+        set
+        {
+            _playerSpeed = value;
+        }
+    }
 
     public PlayerStats PlayerStats
     {
@@ -67,6 +81,7 @@ public class GameController : MonoBehaviour {
     [SerializeField] private PlayerStats _playerStats;
 
     private bool _isEnded = false;
+    private float _playerSpeed = 2;
 
     public void EndGame()
     {
