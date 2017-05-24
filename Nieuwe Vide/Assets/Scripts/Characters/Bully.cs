@@ -32,6 +32,8 @@ public class Bully : Human {
     private Sprite _idleSprite;
     [SerializeField]
     private Sprite _bullySprite;
+    [SerializeField]
+    private AudioAsset _bullySound;
 
     private void VictimBulliedEventHandler(Victim victim)
     {
@@ -96,6 +98,8 @@ public class Bully : Human {
             return;
 
         _spriteRenderer.sprite = _bullySprite;
+
+        AudioManager.Instance.Play(_bullySound, false);
 
         _isBullying = true;
         UIManager.Instance.CloudsManager.GetAvailableCloud().UseCloud(this.transform, 1, 0.5f);

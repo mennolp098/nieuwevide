@@ -49,6 +49,7 @@ public class Human : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     protected Sprite _sadSprite;
     protected Sprite _normalSprite;
+    protected AudioAsset _sadSound;
 
     public void SetSprites(Sprite sadSprite, Sprite normalSprite)
     {
@@ -58,6 +59,7 @@ public class Human : MonoBehaviour
 
     private void Start()
     {
+        _sadSound = Resources.Load("SadSound", typeof(AudioAsset)) as AudioAsset;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _width = _spriteRenderer.bounds.size.x;
         _height = _spriteRenderer.bounds.size.y;
@@ -140,6 +142,7 @@ public class Human : MonoBehaviour
                 break;
             case Emotions.Sad:
                 _spriteRenderer.sprite = _sadSprite;
+                AudioManager.Instance.Play(_sadSound);
                 //TODO: Display sad emotion.
                 break;
         }

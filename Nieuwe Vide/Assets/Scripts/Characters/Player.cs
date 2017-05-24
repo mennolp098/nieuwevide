@@ -44,6 +44,8 @@ public class Player : Human {
     private Sprite _idleSprite;
     [SerializeField]
     private Sprite[] _bullySprites;
+    [SerializeField]
+    private AudioAsset _bullySound;
 
     protected override void Initialize()
     {
@@ -99,6 +101,7 @@ public class Player : Human {
     {
         if(_victimInRange != null)
         {
+            AudioManager.Instance.Play(_bullySound, false);
             _spriteRenderer.sprite = _bullySprites[Random.Range(0, _bullySprites.Length)];
             UIManager.Instance.CloudsManager.GetAvailableCloud().UseCloud(this.transform, 2);
             GameController.Instance.PlayerSpeed = 0;
