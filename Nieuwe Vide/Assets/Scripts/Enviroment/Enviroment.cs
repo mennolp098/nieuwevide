@@ -64,6 +64,7 @@ public class Enviroment : MonoBehaviour {
             EnviromentMover em = bg.AddComponent<EnviromentMover>();
             em.speed = layerSpeed;
             placedBGs.Add(bg);
+            bg.name = this.name+ " " + sprite.name;
             prevPlacedBG = bg;
         }
     }
@@ -77,6 +78,7 @@ public class Enviroment : MonoBehaviour {
             {
                 Vector3 addedOffset = ChangeSprite(go);
                 go.transform.position = new Vector3(GetXPos(prevPlacedBG, go) + XRng(), 0, 0) + offset + addedOffset;
+                go.name = this.name + " " + go.GetComponent<SpriteRenderer>().sprite.name;        //I'm so lazy. Could probably find a better naming method.
                 prevPlacedBG = go;
             }
         }
