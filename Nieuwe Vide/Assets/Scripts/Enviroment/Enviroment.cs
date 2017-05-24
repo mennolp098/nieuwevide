@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class Enviroment : MonoBehaviour {
 
+    [System.Serializable]
+    private struct ObjectData
+    {
+        public Sprite ObjectSprite;
+        public Vector2 Offset;
+    }
+
+    /*
+    private struct PlacedObjectData
+    {
+        public GameObject GameObject;
+        public Vector2 Offset;
+    }*/
+
     [SerializeField]
     private int totalObjects = 15;
 
@@ -14,7 +28,7 @@ public class Enviroment : MonoBehaviour {
     private float layerSpeed = 0;
 
     [SerializeField]
-    private Sprite[] background = new Sprite[2];
+    private ObjectData[] objects = new ObjectData[2];
 
     [SerializeField]
     private Vector3 offset = new Vector3(0, 0, 0);
@@ -32,17 +46,20 @@ public class Enviroment : MonoBehaviour {
         {
             GameObject bg = new GameObject();
             SpriteRenderer bgRenderer = bg.AddComponent<SpriteRenderer>();
-            bgRenderer.sortingLayerID = layer;
-            Sprite sprite = GetRandomBG();
+            bgRenderer.sortingOrder = layer;
+            var data = GetRandomObject();
+            Sprite sprite = data.ObjectSprite;
+            Vector3 addedOffset = data.Offset;
+
             bgRenderer.sprite = sprite;
             bg.transform.parent = this.transform;
             if(prevPlacedBG == null)
             {
-                bg.transform.position = new Vector3(0, 0, 0) + offset;
+                bg.transform.position = new Vector3(0, 0, 0) + offset + addedOffset;
             }
             else
             {
-                bg.transform.position = new Vector3(GetXPos(prevPlacedBG, bg) + XRng(), 0, 0) + offset;
+                bg.transform.position = new Vector3(GetXPos(prevPlacedBG, bg) + XRng(), 0, 0) + offset + addedOffset;
             }
             EnviromentMover em = bg.AddComponent<EnviromentMover>();
             em.speed = layerSpeed;
@@ -58,8 +75,8 @@ public class Enviroment : MonoBehaviour {
             //basically when object is out of screen. Check for resolution?
             if(go.transform.position.x < -20)
             {
-                ChangeBG(go);
-                go.transform.position = new Vector3(GetXPos(prevPlacedBG, go) + XRng(), 0, 0) + offset;
+                Vector3 addedOffset = ChangeSprite(go);
+                go.transform.position = new Vector3(GetXPos(prevPlacedBG, go) + XRng(), 0, 0) + offset + addedOffset;
                 prevPlacedBG = go;
             }
         }
@@ -75,16 +92,25 @@ public class Enviroment : MonoBehaviour {
         Sprite sprite = go.GetComponent<SpriteRenderer>().sprite;
         return sprite.rect.size.x / 100;
     }
-    private Sprite GetRandomBG()
+    private ObjectData GetRandomObject()
     {
-        return background[Random.Range(0, background.Length)];
+        return objects[Random.Range(0, objects.Length)];
     }
     private float XRng()
     {
         return (xRNGRange.x + Random.value * xRNGRange.y) - xRNGRange.x;
     }
-    private void ChangeBG(GameObject _go)
+
+    /// <summary>
+    /// Change the sprite, Returns offset of sprite.
+    /// </summary>
+    /// <param name="_go"></param>
+    /// <returns></returns>
+    private Vector2 ChangeSprite(GameObject _go)
     {
-        _go.GetComponent<SpriteRenderer>().sprite = GetRandomBG();
+        var data = GetRandomObject();
+        _go.GetComponent<SpriteRenderer>().sprite = data.ObjectSprite;
+
+        return data.Offset;
     }
 }

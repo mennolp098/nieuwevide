@@ -52,11 +52,11 @@ public class NPCSpawner : MonoBehaviour {
 		switch(_spawnDirection)
 		{
 		case SpawnDirection.Left:
-			position = new Vector2(-7, 0);
+			position = new Vector2(-7, (float)Random.Range(-50,-30) / 10);
 			newNPC.GetComponent<T>().Direction = 1;
 			break;
 		case SpawnDirection.Right:
-			position = new Vector2(7, 0);
+			position = new Vector2(7, (float)Random.Range(-50, -30) / 10);
 			newNPC.GetComponent<T>().Direction = -1;
 			break;
 		}
