@@ -16,7 +16,6 @@ public class Victim : Human
 
     private bool _isBullied;
 
-
     /// <summary>
     /// Trigger this when you want to bully this victim.
     /// </summary>
