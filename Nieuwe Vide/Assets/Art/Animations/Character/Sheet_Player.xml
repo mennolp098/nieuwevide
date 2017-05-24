@@ -1,0 +1,22 @@
+<TextureAtlas imagePath="sprites.png">
+	<SubTexture name="Sheet_Player00.png" x="0" y="602" width="260" height="600"/>
+	<SubTexture name="Sheet_Player01.png" x="0" y="0" width="260" height="600"/>
+	<SubTexture name="Sheet_Player02.png" x="786" y="0" width="260" height="600"/>
+	<SubTexture name="Sheet_Player03.png" x="1572" y="0" width="260" height="600"/>
+	<SubTexture name="Sheet_Player04.png" x="1310" y="1204" width="260" height="600"/>
+	<SubTexture name="Sheet_Player05.png" x="1310" y="602" width="260" height="600"/>
+	<SubTexture name="Sheet_Player06.png" x="1310" y="0" width="260" height="600"/>
+	<SubTexture name="Sheet_Player07.png" x="1048" y="1204" width="260" height="600"/>
+	<SubTexture name="Sheet_Player08.png" x="1048" y="602" width="260" height="600"/>
+	<SubTexture name="Sheet_Player09.png" x="1048" y="0" width="260" height="600"/>
+	<SubTexture name="Sheet_Player10.png" x="786" y="1204" width="260" height="600"/>
+	<SubTexture name="Sheet_Player11.png" x="786" y="602" width="260" height="600"/>
+	<SubTexture name="Sheet_Player12.png" x="1572" y="602" width="260" height="600"/>
+	<SubTexture name="Sheet_Player13.png" x="524" y="1204" width="260" height="600"/>
+	<SubTexture name="Sheet_Player14.png" x="524" y="602" width="260" height="600"/>
+	<SubTexture name="Sheet_Player15.png" x="524" y="0" width="260" height="600"/>
+	<SubTexture name="Sheet_Player16.png" x="262" y="1204" width="260" height="600"/>
+	<SubTexture name="Sheet_Player17.png" x="262" y="602" width="260" height="600"/>
+	<SubTexture name="Sheet_Player18.png" x="262" y="0" width="260" height="600"/>
+	<SubTexture name="Sheet_Player19.png" x="0" y="1204" width="260" height="600"/>
+</TextureAtlas>

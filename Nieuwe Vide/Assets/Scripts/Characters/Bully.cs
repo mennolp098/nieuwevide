@@ -81,6 +81,7 @@ public class Bully : Human {
         //TODO: show bully animation
         //TODO: lookat bully
 
+        UIManager.Instance.CloudsManager.GetAvailableCloud().UseCloud(this.transform, 1, 0.5f);
         Debug.Log(this.name + " is now bullying: " + victim.name);
     }
 

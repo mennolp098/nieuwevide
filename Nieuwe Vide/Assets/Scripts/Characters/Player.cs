@@ -93,6 +93,8 @@ public class Player : Human {
         if(_victimInRange != null)
         {
             Debug.Log("Player is now bullying: " + _victimInRange.name);
+            UIManager.Instance.CloudsManager.GetAvailableCloud().UseCloud(this.transform, 2);
+
             _victimInRange.BullyThis();
             _victimInRange = null;
             _victimIndicator.SetActive(false);

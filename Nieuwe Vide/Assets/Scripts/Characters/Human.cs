@@ -35,6 +35,7 @@ public class Human : MonoBehaviour
 
     protected bool _isMoving;
     protected int _direction = -1;
+
     [SerializeField]
     protected float _speed = 1;
 

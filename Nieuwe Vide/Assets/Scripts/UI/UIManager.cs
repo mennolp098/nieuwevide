@@ -32,6 +32,15 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public CloudsManager CloudsManager
+    {
+        get
+        {
+            return _cloudsManager;
+        }
+    }
+
+    [SerializeField] private CloudsManager _cloudsManager;
     [SerializeField] private EndScreen _endScreen;
 
     private static UIManager _instance;
